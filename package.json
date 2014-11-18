@@ -1,0 +1,15 @@
+{
+  "name": "udptool",
+  "version": "0.0.1",
+  "description": "sends and receives text over UDP",
+  "main": "udptool.coffee",
+  "dependencies": {
+    "commander": "^2.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "coffee udptool.coffee"
+  },
+  "author": "Enrico Fasoli",
+  "license": "MIT"
+}
