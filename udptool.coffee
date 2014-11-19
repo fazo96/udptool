@@ -4,7 +4,7 @@
 
 program = require 'commander'
 program
-  .version '0.0.2'
+  .version '0.0.3'
   .usage '<command> <args...> [options...]'
   .option '-s, --silent', 'useful when parsing the output from stdout'
   .option '-ne, --no-errors', "don't output errors to stdout"
@@ -13,9 +13,10 @@ program.command 'listen <port>'
   .description 'listen for datagrams on given Port'
   .action (port) ->
     socket = require('dgram').createSocket 'udp4'
-    socket.on 'error', (err) -> console.log err
+    socket.on 'error', (err) -> console.log err unless program.no-errors
     socket.on 'listening', ->
-      console.log 'Started listening' unless program.silent
+      unless program.silent
+        console.log 'Started listening for datagrams on port ' + port
     socket.on 'message', (msg,src) -> console.log '('+src.address+') '+msg
     socket.bind port
 
