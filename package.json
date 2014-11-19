@@ -1,8 +1,8 @@
 {
   "name": "udptool",
-  "version": "0.0.4",
-  "description": "sends and receives text over UDP",
-  "main": "udptool.coffee",
+  "version": "0.0.5",
+  "description": "send and receive text messages and files over UDP",
+  "main": "src/udptool.coffee",
   "dependencies": {
     "commander": "^2.5.0"
   },
@@ -10,8 +10,16 @@
     "coffee-script": "^1.8.0"
   },
   "scripts": {
-    "test": "coffee udptool.coffee"
+    "build": "./build.sh",
+    "prepublish": "./build.sh"
   },
   "author": "Enrico Fasoli",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/fazo96/udptool"
+  },
+  "bugs": {
+    "url": "http://github.com/fazo96/udptool/issues"
+  }
 }
