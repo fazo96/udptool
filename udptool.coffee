@@ -2,12 +2,15 @@
 
 # UDPTOOL written by Enrico Fasoli
 
+fs = require 'fs'
 program = require 'commander'
 program
-  .version '0.0.3'
+  .version '0.0.4'
   .usage '<command> <args...> [options...]'
-  .option '-s, --silent', 'useful when parsing the output from stdout'
-  .option '-ne, --no-errors', "don't output errors to stdout"
+  .option '-s, --silent', 'avoid informational messages'
+  .option '-r, --raw', 'output raw text in datagrams without writing metadata'
+  .option '-ne, --no-errors', 'avoid error messages'
+  .option '-o, --one', 'exit after receiving one message'
 
 program.command 'listen <port>'
   .description 'listen for datagrams on given Port'
@@ -17,7 +20,10 @@ program.command 'listen <port>'
     socket.on 'listening', ->
       unless program.silent
         console.log 'Started listening for datagrams on port ' + port
-    socket.on 'message', (msg,src) -> console.log '('+src.address+') '+msg
+    socket.on 'message', (msg,src) ->
+      if program.raw then console.log ''+msg
+      else console.log '(From '+src.address+', '+src.size+' bytes): '+msg
+      if program.one then socket.close(); process.exit 0
     socket.bind port
 
 program.command 'send <msg> <address> <port>'
@@ -29,6 +35,18 @@ program.command 'send <msg> <address> <port>'
       if err then console.log err unless program.no-errors
       else console.log 'Message Sent to '+addr+':'+port unless program.silent
       socket.close()
+
+program.command 'sendfile <filepath> <address> <port>'
+  .description 'send a text file to given IP and Port'
+  .action (fp,addr,port) ->
+    socket = require('dgram').createSocket 'udp4'
+    fs.readFile fp, (error,content) ->
+      if error then return console.log error unless program.no-error
+      buf = new Buffer content
+      socket.send content, 0, buf.length, port, addr, (err, bytes) ->
+        if err then console.log err unless program.no-errors
+        else console.log 'File Sent to '+addr+':'+port unless program.silent
+        socket.close()
 
 res = program.parse process.argv
 program.outputHelp() if res.args.length is 0 and not program.silent

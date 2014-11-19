@@ -1,6 +1,6 @@
 {
   "name": "udptool",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "sends and receives text over UDP",
   "main": "udptool.coffee",
   "dependencies": {
