@@ -5,7 +5,7 @@
 fs = require 'fs'
 program = require 'commander'
 program
-  .version '0.0.5'
+  .version '0.0.6'
   .usage '<command> <args...> [options...]'
   .option '-s, --silent', 'avoid informational messages'
   .option '-r, --raw', 'output raw text in datagrams without writing metadata'

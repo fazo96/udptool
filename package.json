@@ -1,8 +1,11 @@
 {
   "name": "udptool",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "send and receive text messages and files over UDP",
   "main": "src/udptool.coffee",
+  "bin" : {
+    "udptool": "./bin/udptool"
+  },
   "dependencies": {
     "commander": "^2.5.0"
   },

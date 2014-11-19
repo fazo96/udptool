@@ -4,6 +4,10 @@ Simple tool to send and receive UDP text messages and files over the network bui
 
 ## Usage
 
+Install the tool using `npm install -g udptool`.
+
+This is the output of `udptool --help`:
+
     Usage: udptool <command> <args...> [options...]
 
     Commands:
