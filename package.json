@@ -6,7 +6,9 @@
   "dependencies": {
     "commander": "^2.5.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "coffee-script": "^1.8.0"
+  },
   "scripts": {
     "test": "coffee udptool.coffee"
   },
